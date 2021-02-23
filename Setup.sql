@@ -21,3 +21,20 @@
 
 --   PRIMARY KEY (Id)
 -- );
+
+CREATE TABLE contractorjobs
+(
+  id INT AUTO_INCREMENT,
+  contractorId INT,
+  jobId INT,
+
+  PRIMARY KEY (id),
+
+  FOREIGN KEY (contractorId)
+    REFERENCES contractors(id)
+    ON DELETE CASCADE,
+
+  FOREIGN KEY (jobId)
+    REFERENCES jobs(id)
+    ON DELETE CASCADE
+);
