@@ -1,6 +1,3 @@
-
-
-
 using System.Collections.Generic;
 using System.Data;
 using contractorapi.Models;
@@ -25,7 +22,7 @@ namespace contractorapi.Repositories
       return _db.Query<Contractor>(sql);
     }
 
-    internal Contractor Get(int id)
+    internal Contractor getById(int id)
     {
       string sql = "SELECT * FROM contractors WHERE id = @id;";
       return _db.QueryFirstOrDefault<Contractor>(sql, new { id });
@@ -35,9 +32,9 @@ namespace contractorapi.Repositories
     {
       string sql = @"
       INSERT INTO contractors
-      (name, color)
+      (name, description)
       VALUES
-      (@Name, @Color);
+      (@Name, @Description);
       SELECT LAST_INSERT_ID();";
       return _db.ExecuteScalar<int>(sql, newContractor);
     }
@@ -46,6 +43,19 @@ namespace contractorapi.Repositories
     {
       string sql = "DELETE FROM contractors WHERE id = @id;";
       _db.Execute(sql, new { id });
+    }
+
+
+    internal Contractor Edit(Contractor original)
+    {
+      string sql = @"
+          UPDATE contractors
+          SET
+              name = @Name,
+              description = @Description
+          WHERE id = @Id;
+          SELECT * FROM contractors WHERE id = @Id;";
+      return _db.QueryFirstOrDefault<Contractor>(sql, original);
     }
 
 
