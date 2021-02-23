@@ -81,5 +81,21 @@ namespace contractorapi.Controllers
     }
 
 
+
+
+    [HttpPut("{id}")]
+    public ActionResult<Contractor> Edit([FromBody] Contractor editContractor, int id)
+    {
+      try
+      {
+        editContractor.Id = id;
+        return Ok(_cs.Edit(editContractor));
+      }
+      catch (Exception e)
+      {
+
+        return BadRequest(e.Message);
+      }
+    }
   }
 }
