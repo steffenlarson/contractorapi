@@ -37,9 +37,11 @@ namespace contractorapi
 
       services.AddTransient<ContractorsService>();
       services.AddTransient<JobsService>();
+      services.AddTransient<ContractorJobsService>();
 
       services.AddTransient<ContractorsRepository>();
       services.AddTransient<JobsRepository>();
+      services.AddTransient<ContractorJobsRepository>();
 
 
       services.AddSwaggerGen(c =>

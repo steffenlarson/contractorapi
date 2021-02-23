@@ -1,7 +1,16 @@
+using System;
+using Microsoft.AspNetCore.Mvc;
+
+
 namespace contractorapi.Controllers
 {
-    public class ContractorJobsController
-    {
-        
-    }
+
+  [Route("api/[controller]")]
+  [ApiController]
+  public class ContractorJobsController : ControllerBase
+  {
+
+    private readonly
+
+  }
 }
