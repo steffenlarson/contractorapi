@@ -40,11 +40,11 @@ namespace contractorapi.Controllers
 
     // GET api/Contractors/5
     [HttpGet("{id}")]
-    public ActionResult<Contractor> Get(int id)
+    public ActionResult<Contractor> getById(int id)
     {
       try
       {
-        return Ok(_cs.Get(id));
+        return Ok(_cs.getByID(id));
       }
       catch (Exception e)
       {
