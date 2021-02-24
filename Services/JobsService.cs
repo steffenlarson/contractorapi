@@ -9,11 +9,12 @@ namespace contractorapi.Services
   public class JobsService
   {
     private readonly JobsRepository _repo;
+    private readonly ContractorsRepository _crepo;
 
-
-    public JobsService(JobsRepository repo)
+    public JobsService(JobsRepository repo, ContractorsRepository crepo)
     {
       _repo = repo;
+      _crepo = crepo;
     }
 
 
@@ -57,6 +58,17 @@ namespace contractorapi.Services
       original.Description = editJob.Description != null ? editJob.Description : original.Description;
 
       return _repo.Edit(original);
+    }
+
+
+    internal IEnumerable<Job> GetJobsByContractorId(int contractorId)
+    {
+      Contractor exists = _crepo.getById(contractorId);
+      if (exists == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return _repo.GetJobsByContractorId(contractorId);
     }
 
 

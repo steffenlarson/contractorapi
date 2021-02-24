@@ -14,11 +14,13 @@ namespace contractorapi.Controllers
   {
 
     private readonly ContractorsService _cs;
+    private readonly JobsService _js;
 
 
-    public ContractorsController(ContractorsService cs)
+    public ContractorsController(ContractorsService cs, JobsService js)
     {
       _cs = cs;
+      _js = js;
     }
 
 
@@ -97,5 +99,22 @@ namespace contractorapi.Controllers
         return BadRequest(e.Message);
       }
     }
+
+
+
+    [HttpGet("{contractorId}/contractorjobs")]
+    public ActionResult<IEnumerable<Job>> GetContractorJobs(int contractorId)
+    {
+      try
+      {
+        return Ok(_js.GetJobsByContractorId(contractorId));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
+
   }
 }

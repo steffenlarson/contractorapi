@@ -59,5 +59,18 @@ namespace contractorapi.Repositories
     }
 
 
+    internal IEnumerable<Job> GetJobsByContractorId(int contractorId)
+    {
+      string sql = @"
+      SELECT j.*,
+      cj.id as ContractorJobId 
+      FROM contractorjobs cj
+      JOIN jobs j ON j.id = cj.jobId
+      WHERE contractorId = @contractorId";
+
+      return _db.Query<ContractorJobViewModel>(sql, new { contractorId });
+    }
+
+
   }
 }

@@ -11,4 +11,9 @@ namespace contractorapi.Models
     public string Description { get; set; }
 
   }
+
+  public class ContractorJobViewModel : Job
+  {
+    public int ContractorJobId { get; set; }
+  }
 }
